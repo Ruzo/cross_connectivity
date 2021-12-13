@@ -8,10 +8,12 @@ import 'package:cross_connectivity/cross_connectivity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,12 +21,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -34,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cross Connectivity Example'),
+        title: const Text('Cross Connectivity Example'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,18 +50,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Icon(
-                    isConnected == true
-                        ? Icons.signal_wifi_4_bar
-                        : Icons.signal_wifi_off,
+                    isConnected == true ? Icons.signal_wifi_4_bar : Icons.signal_wifi_off,
                     color: isConnected == true ? Colors.green : Colors.red,
                   ),
                   const SizedBox(width: 8),
                   Text(
                     '$status',
                     style: TextStyle(
-                      color: status != ConnectivityStatus.none
-                          ? Colors.green
-                          : Colors.red,
+                      color: status != ConnectivityStatus.none ? Colors.green : Colors.red,
                     ),
                   ),
                 ],

@@ -9,17 +9,14 @@ import 'connectivity_service.interface.dart';
 
 /// Discover network connectivity configurations: Distinguish between WI-FI
 /// and cellular, check WI-FI status and more.
-class ConnectivityService extends ConnectivityServiceInterface
-    with ConnectivityMixin {
+class ConnectivityService extends ConnectivityServiceInterface with ConnectivityMixin {
   /// Constructs a singleton instance of [ConnectivityService].
   ConnectivityService() : super() {
     void update() async {
       final hasRealConnection = await hasConnection();
 
       connected.add(hasRealConnection);
-      connectivityChanged.add(hasRealConnection
-          ? ConnectivityStatus.unknown
-          : ConnectivityStatus.none);
+      connectivityChanged.add(hasRealConnection ? ConnectivityStatus.unknown : ConnectivityStatus.none);
     }
 
     lookupPolling(updateConnectivityStatus: true);
@@ -35,6 +32,7 @@ class ConnectivityService extends ConnectivityServiceInterface
   /// Checks the `REAL` connection status of the device.
   ///
   /// Instead listen for connection status changes via [isConnected] stream.
+  @override
   Future<bool> checkConnection() async {
     final status = await hasConnection();
 
@@ -49,8 +47,7 @@ class ConnectivityService extends ConnectivityServiceInterface
   ///
   /// Please note that it will not let you know about state of the `REAL` network connection.
   @override
-  ValueStream<ConnectivityStatus> get onConnectivityChanged =>
-      connectivityChanged;
+  ValueStream<ConnectivityStatus> get onConnectivityChanged => connectivityChanged;
 
   /// Checks the connection status of the device.
   ///
@@ -60,9 +57,7 @@ class ConnectivityService extends ConnectivityServiceInterface
   /// Instead listen for connectivity changes via [onConnectivityChanged] stream.
   @override
   Future<ConnectivityStatus> checkConnectivity() async {
-    final status = await hasConnection()
-        ? ConnectivityStatus.unknown
-        : ConnectivityStatus.none;
+    final status = await hasConnection() ? ConnectivityStatus.unknown : ConnectivityStatus.none;
 
     if (connectivityChanged.valueOrNull != status) {
       connectivityChanged.add(status);
@@ -70,7 +65,4 @@ class ConnectivityService extends ConnectivityServiceInterface
 
     return status;
   }
-
-  @override
-  void dispose() => super.dispose();
 }

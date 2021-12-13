@@ -32,8 +32,8 @@ class ConnectivityService extends ConnectivityServiceInterface {
 
     if (ConnectivitySettings.enablePolling) {
       /// [NetworkInformation] could be null due to incompatiability with Safari and IE.
-      _subscription = html.window.navigator.connection?.onChange
-          .listen((_) => update(html.window.navigator.onLine == true));
+      _subscription =
+          html.window.navigator.connection?.onChange.listen((_) => update(html.window.navigator.onLine == true));
     }
 
     update(html.window.navigator.onLine == true);
@@ -84,12 +84,12 @@ class ConnectivityService extends ConnectivityServiceInterface {
   ///
   /// Please note that it will not let you know about state of the `REAL` network connection.
   @override
-  ValueStream<ConnectivityStatus> get onConnectivityChanged =>
-      connectivityChanged;
+  ValueStream<ConnectivityStatus> get onConnectivityChanged => connectivityChanged;
 
   /// Checks the `REAL` connection status of the device.
   ///
   /// Instead listen for connection status changes via [isConnected] stream.
+  @override
   Future<bool> checkConnection() async {
     final status = html.window.navigator.onLine == true;
 

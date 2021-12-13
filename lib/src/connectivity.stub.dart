@@ -22,12 +22,12 @@ class Connectivity implements BaseConnectivityServiceInterface {
   ///
   /// Please note that it will not let you know about state of the `REAL` network connection.
   @override
-  ValueStream<ConnectivityStatus> get onConnectivityChanged =>
-      throw UnimplementedError();
+  ValueStream<ConnectivityStatus> get onConnectivityChanged => throw UnimplementedError();
 
   /// Checks the `REAL` connection status of the device.
   ///
   /// Instead listen for connection status changes via [isConnected] stream.
+  @override
   Future<bool> checkConnection() => throw UnimplementedError();
 
   /// Checks the connection status of the device.

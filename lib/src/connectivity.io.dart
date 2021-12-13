@@ -41,12 +41,12 @@ class Connectivity implements BaseConnectivityServiceInterface {
   ///
   /// Please note that it will not let you know about state of the `REAL` network connection.
   @override
-  ValueStream<ConnectivityStatus> get onConnectivityChanged =>
-      _connectivityService.onConnectivityChanged;
+  ValueStream<ConnectivityStatus> get onConnectivityChanged => _connectivityService.onConnectivityChanged;
 
   /// Checks the `REAL` connection status of the device.
   ///
   /// Instead listen for connection status changes via [isConnected] stream.
+  @override
   Future<bool> checkConnection() => _connectivityService.checkConnection();
 
   /// Checks the connection status of the device.
@@ -56,8 +56,7 @@ class Connectivity implements BaseConnectivityServiceInterface {
   ///
   /// Instead listen for connectivity changes via [onConnectivityChanged] stream.
   @override
-  Future<ConnectivityStatus> checkConnectivity() =>
-      _connectivityService.checkConnectivity();
+  Future<ConnectivityStatus> checkConnectivity() => _connectivityService.checkConnectivity();
 
   @override
   void dispose() => _connectivityService.dispose();
